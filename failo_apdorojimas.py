@@ -1,6 +1,6 @@
 import csv
 from datetime import datetime
-from io import StringIO
+from klientas import Klientas
 from transporto_priemone import Automobilis, Mikroautobusas
 
 def issaugoti_i_faila(klientai, failas):
@@ -9,11 +9,15 @@ def issaugoti_i_faila(klientai, failas):
         for klientas in klientai:
             for nuoma in klientas.nuomos:
                 if isinstance(nuoma, Automobilis):
-                    writer.writerow([klientas.vardas, "Automobilis", nuoma._marke, nuoma._numeris,
-                                     nuoma._metai, nuoma._durys, nuoma.ar_isnuomota(), str(datetime.today().date())])
+                    writer.writerow([
+                        klientas.vardas, "Automobilis", nuoma._marke, nuoma._numeris,
+                        nuoma._metai, nuoma._durys, nuoma.ar_isnuomota(), str(datetime.today().date())
+                    ])
                 elif isinstance(nuoma, Mikroautobusas):
-                    writer.writerow([klientas.vardas, "Mikroautobusas", nuoma._marke, nuoma._numeris,
-                                     nuoma._metai, nuoma._vietos, nuoma.ar_isnuomota(), str(datetime.today().date())])
+                    writer.writerow([
+                        klientas.vardas, "Mikroautobusas", nuoma._marke, nuoma._numeris,
+                        nuoma._metai, nuoma._vietos, nuoma.ar_isnuomota(), str(datetime.today().date())
+                    ])
 
 def nuskaityti_is_failo(failas):
     with open(failas, 'r') as f:
